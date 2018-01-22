@@ -1,6 +1,8 @@
 # NSJC_Grip_Generator
 Nintendo Swtich Joy-con Grip 3D model Generator 
 https://www.thingiverse.com/thing:2669580
+Download Generator
+https://github.com/gilsrus/NSJC_Grip_Generator/raw/master/NSJCgripGene.zip
 
 ## Requirements
 - openFrameworks 0.9.8+
