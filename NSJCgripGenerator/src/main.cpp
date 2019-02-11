@@ -27,8 +27,8 @@ int main()
 #else
 #ifdef FORCE_PROGRAMMMABLE
     ofGLWindowSettings glWindowSettings;
-    glWindowSettings.width = 1280;
-    glWindowSettings.height = 720;
+//    glWindowSettings.width = 1280;
+ //   glWindowSettings.height = 720;
     glWindowSettings.setGLVersion(3, 2);
     ofCreateWindow(glWindowSettings);
 #else

@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxImGui.h"
+#include "ofxSTL.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,11 +25,7 @@ class ofApp : public ofBaseApp{
    
 
     //ofMesh
-    ofVboMesh mesh;
-    ofVboMesh jcl;
-    ofVboMesh jcr;
-    ofVboMesh backgrip;
-    ofVboMesh save;
+    ofVboMesh mesh,jcl,jcr,backgrip,save;
     
     vector<ofVec3f> gripvertex;
     vector<ofVec3f> jcrvertex;

@@ -14,11 +14,26 @@ void ofApp::setup(){
     
     gui.setup();
     guiVisible = true;
-
-    gripvertex   = mesh.getVertices();
-    jcrvertex   = jcr.getVertices();
-    jclvertex  = jcl.getVertices();
+   
+    for(int i = 0; i < mesh.getVertices().size(); i++){
+        gripvertex.push_back(mesh.getVertices()[i]);
+    }
+    for(int i = 0; i < jcr.getVertices().size(); i++){
+        jcrvertex.push_back(jcr.getVertices()[i]);
+    }
+    for(int i = 0; i < jcl.getVertices().size(); i++){
+        jclvertex.push_back(jcl.getVertices()[i]);
+    }
+    for(int i = 0; i < backgrip.getVertices().size(); i++){
+        bgripvertex.push_back(backgrip.getVertices()[i]);
+    }
+    
+    /*
+    gripvertex  = mesh.getVertices();
+    jcrvertex  = jcr.getVertices();
+    jclvertex = jcl.getVertices();
     bgripvertex = backgrip.getVertices();
+    */
     
     for(int i = 0; i < (int)gripvertex.size();i++){
         
@@ -139,10 +154,12 @@ void ofApp::draw(){
     
   //GUI
     mouseOverGui = false;
+    
     if (guiVisible)
     {
         mouseOverGui = imGui();
     }
+    
     if (mouseOverGui)
     {
        camera.disableMouseInput();
@@ -168,7 +185,7 @@ bool ofApp::imGui()
     {
        
         
-        if (ofxImGui::BeginWindow("NSJC-Grip Generator ver 0.1a", mainSettings, false))
+        if (ofxImGui::BeginWindow("NSJC-Grip Generator ver 0.2a", mainSettings, false))
         {
             
         
@@ -214,11 +231,32 @@ bool ofApp::imGui()
                     save.append(mesh);
                     date = ofGetTimestampString();
                     save.save(date + ".ply");
-                    saved = true;
+                    //
+                    
+                    if (save.getVertices().size()<1) return;
+                    
+                    
+                    ofxSTLExporter stl;
+                    stl.beginModel();
+                    
+                    for (int i=0; i < save.getIndices().size()-2; i+=3) {
+                        ofVec3f a = save.getVertices().at(save.getIndex(i+0));
+                        ofVec3f b = save.getVertices().at(save.getIndex(i+1));
+                        ofVec3f c = save.getVertices().at(save.getIndex(i+2));
+                        ofVec3f n = save.getNormal(save.getIndex(i));
+                        stl.addTriangle(a,b,c,n);
+                    }
+                    
+                    stl.useASCIIFormat(false);
+                    stl.saveModel(ofToDataPath(date + ".stl"));
+                    
+                    //
+                     saved = true;
                     save.clear();
+                    
                 }
 
-                
+             
                 
                 ofxImGui::EndTree(mainSettings);
             }
