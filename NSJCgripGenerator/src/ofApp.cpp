@@ -264,7 +264,7 @@ bool ofApp::imGui()
            
             ImGui::Spacing();
             if(saved){
-                ImGui::Text("Saved as %s.ply", date.c_str());
+                ImGui::Text("Saved as %s.stl", date.c_str());
             }
             ImGui::Text("Frame (%.2f FPS)",  ImGui::GetIO().Framerate);
           
